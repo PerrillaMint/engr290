@@ -22,22 +22,29 @@ void startPropulsionFan();
 void stopFan();
 
 //function implementations 
-//ALL ARE THE SAME RN
+//ALL ARE THE SAME (to change pin layout, currently all the same)
 void startHoverFan(){
     TCCR0A|=(1<<COM0A1); // non-inverted pin operation
     TCCR0A|=(1<<WGM00); // PWM, Phase Correct
-    OCR0A=0; // D=0, i.e. the fan is OFF. OCRA=255 will turn the fan ON at 100% of its power.
+    OCR0A=255; // D=0, i.e. the fan is OFF. OCRA=255 will turn the fan ON at 100% of its power.
     TCCR0B|=((1<<CS01)|(1<<CS00)); // Prescaler=64. Start the timer.
 }
 void startPropulsionFan(){
+    //PD5
     TCCR0A|=(1<<COM0A1); // non-inverted pin operation
     TCCR0A|=(1<<WGM00); // PWM, Phase Correct
-    OCR0A=0; // D=0, i.e. the fan is OFF. OCRA=255 will turn the fan ON at 100% of its power.
+    OCR0A=255; // D=0, i.e. the fan is OFF. OCRA=255 will turn the fan ON at 100% of its power.
     TCCR0B|=((1<<CS01)|(1<<CS00)); // Prescaler=64. Start the timer.
 }
 void stopFan(){
     TCCR0A|=(1<<COM0A1); // non-inverted pin operation
     TCCR0A|=(1<<WGM00); // PWM, Phase Correct
     OCR0A=0; // D=0, i.e. the fan is OFF. OCRA=255 will turn the fan ON at 100% of its power.
+    TCCR0B|=((1<<CS01)|(1<<CS00)); // Prescaler=64. Start the timer.
+
+    //PD5
+    TCCR0A|=(1<<COM0A1); // non-inverted pin operation
+    TCCR0A|=(1<<WGM00); // PWM, Phase Correct
+    OCR0B=0; // D=0, i.e. the fan is OFF. OCRA=255 will turn the fan ON at 100% of its power.
     TCCR0B|=((1<<CS01)|(1<<CS00)); // Prescaler=64. Start the timer.
 }
